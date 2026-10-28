@@ -172,11 +172,169 @@ pub fn decode(request: &ai::BidiAppendRequest) -> Result<DecodedAppend> {
     }
     let payload = hex::decode(&request.data)
         .map_err(|error| Error::Protocol(format!("invalid BidiAppend hex: {error}")))?;
+    let message = match agent::AgentClientMessage::decode(payload.as_slice()) {
+        Ok(message) => message,
+        Err(error) => {
+            tracing::warn!(%error, "AgentClientMessage decode failed; salvaging fields");
+            salvage(&payload)
+                .ok_or_else(|| Error::Protocol(format!("failed to decode Protobuf message: {error}")))?
+        }
+    };
     Ok(DecodedAppend {
         request_id: request_id.into(),
         seqno: request.append_seqno,
-        message: agent::AgentClientMessage::decode(payload.as_slice())?,
+        message,
     })
+}
+
+fn read_varint(buf: &[u8], pos: &mut usize) -> Option<u64> {
+    let (mut value, mut shift) = (0u64, 0u32);
+    loop {
+        let byte = *buf.get(*pos)?;
+        *pos += 1;
+        value |= ((byte & 0x7f) as u64) << shift;
+        if byte & 0x80 == 0 {
+            return Some(value);
+        }
+        shift += 7;
+        if shift >= 64 {
+            return None;
+        }
+    }
+}
+
+fn fields(buf: &[u8]) -> Vec<(u32, u8, &[u8])> {
+    let mut out = Vec::new();
+    let mut pos = 0usize;
+    while pos < buf.len() {
+        let Some(tag) = read_varint(buf, &mut pos) else { break };
+        let (number, wire) = (tag >> 3, (tag & 7) as u8);
+        let len = match wire {
+            0 => match read_varint(buf, &mut pos) {
+                Some(_) => 0,
+                None => break,
+            },
+            1 => 8,
+            5 => 4,
+            2 => match read_varint(buf, &mut pos) {
+                Some(len) => len as usize,
+                None => break,
+            },
+            _ => break,
+        };
+        if pos + len > buf.len() {
+            break;
+        }
+        out.push((number as u32, wire, &buf[pos..pos + len]));
+        pos += len;
+    }
+    out
+}
+
+fn salvage(payload: &[u8]) -> Option<agent::AgentClientMessage> {
+    for (number, wire, value) in fields(payload) {
+        if number == 1 && wire == 2 {
+            let request = salvage_run_request(value);
+            return Some(agent::AgentClientMessage {
+                message: Some(agent::agent_client_message::Message::RunRequest(request)),
+            });
+        }
+    }
+    Some(agent::AgentClientMessage { message: None })
+}
+
+fn salvage_run_request(buf: &[u8]) -> agent::AgentRunRequest {
+    let mut request = agent::AgentRunRequest::default();
+    for (number, wire, value) in fields(buf) {
+        if wire != 2 {
+            continue;
+        }
+        match number {
+            1 => {
+                if let Ok(state) = agent::ConversationStateStructure::decode(value) {
+                    request.conversation_state = Some(state);
+                }
+            }
+            3 => {
+                if let Ok(details) = agent::ModelDetails::decode(value) {
+                    request.model_details = Some(details);
+                }
+            }
+            9 => {
+                if let Ok(model) = agent::RequestedModel::decode(value) {
+                    request.requested_model = Some(model);
+                }
+            }
+            _ => {
+                if request.action.is_none() {
+                    if let Ok(action) = agent::ConversationAction::decode(value) {
+                        request.action = Some(action);
+                    } else if let Some(text) = user_text(value) {
+                        request.action = Some(user_message_action(text));
+                    }
+                }
+            }
+        }
+    }
+    request
+}
+
+fn user_text(buf: &[u8]) -> Option<String> {
+    let parts = fields(buf);
+    match parts.as_slice() {
+        [(_, 0, _), (_, 2, text)] => {
+            String::from_utf8(text.to_vec()).ok().filter(|text| !text.is_empty())
+        }
+        _ => None,
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn salvages_cursor_327_run_request() {
+        let payload = include_bytes!("../../../tests/fixtures/bidiappend-3.27.bin");
+        let request = ai::BidiAppendRequest {
+            data: hex::encode(payload),
+            request_id: Some(ai::BidiRequestId {
+                request_id: "test-request".into(),
+            }),
+            append_seqno: 0,
+            data_binary: Vec::new(),
+        };
+        let decoded = decode(&request).expect("salvaged decode");
+        assert_eq!(decoded.model_id(), Some("ca6ef05c4f6688be"));
+        let Some(agent::agent_client_message::Message::RunRequest(run)) = decoded.message.message
+        else {
+            panic!("expected run request");
+        };
+        assert!(run.conversation_state.is_none());
+        let Some(agent::conversation_action::Action::UserMessageAction(action)) =
+            run.action.and_then(|action| action.action)
+        else {
+            panic!("expected user message action");
+        };
+        assert_eq!(action.user_message.unwrap().text, "hello");
+    }
+}
+
+fn user_message_action(text: String) -> agent::ConversationAction {
+    agent::ConversationAction {
+        action: Some(agent::conversation_action::Action::UserMessageAction(
+            agent::UserMessageAction {
+                user_message: Some(agent::UserMessage {
+                    text,
+                    message_id: uuid::Uuid::new_v4().to_string(),
+                    mode: agent::AgentMode::Agent as i32,
+                    ..Default::default()
+                }),
+                ..Default::default()
+            },
+        )),
+        ..Default::default()
+    }
 }
 
 pub async fn append(

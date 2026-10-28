@@ -1,0 +1,228 @@
+
+í7
+$1301ba1e-3885-4758-a191-3bab3075e125E
+ca6ef05c4f6688be
+context1m
+	reasoningmedium
+fastfalse"	hello*agent:	
+default:F
+grok-4.7
+context256k
+reasoning_effortmedium
+fastfalse:(
+grok-4.6
+effortlow
+fastfalse:C
+claude-opus-5-5
+context300k
+effortmedium
+fastfalse:,
+gemini-4-argon
+reasoning_effortmedium:<
+muse-wonder-1.0
+context300k
+reasoning_efforthigh:B
+gpt-5.6-sol
+context272k
+	reasoningmedium
+fastfalse:E
+claude-fable-5-1
+thinkingtrue
+context300k
+efforthigh:(
+grok-4.5
+effortlow
+fastfalse:>
+claude-sonnet-5-5
+context300k
+reasoning_efforthigh:E
+3b48a34a6daaca67
+context200k
+	reasoninghigh
+fastfalse:E
+ca6ef05c4f6688be
+context1m
+	reasoningmedium
+fastfalse:k
+6plugin:dev.cursorbyok.examples.grok-auth/grok/grok-4.6
+context200k
+	reasoninghigh
+fastfalse:k
+6plugin:dev.cursorbyok.examples.grok-auth/grok/grok-4.5
+context200k
+	reasoninghigh
+fastfalse:Ç
+Mplugin:dev.cursorbyok.plugins.antigravity-auth/antigravity/gemini-3.1-pro-low
+context200k
+	reasoninghigh
+fastfalse:Ñ
+Oplugin:dev.cursorbyok.plugins.antigravity-auth/antigravity/gemini-3.7-flash-low
+context200k
+	reasoninghigh
+fastfalse:á
+Rplugin:dev.cursorbyok.plugins.antigravity-auth/antigravity/gemini-3.7-flash-medium
+context200k
+	reasoninghigh
+fastfalse:É
+Nplugin:dev.cursorbyok.plugins.antigravity-auth/antigravity/gemini-3.1-pro-high
+context200k
+	reasoninghigh
+fastfalse:Ä
+Kplugin:dev.cursorbyok.plugins.antigravity-auth/antigravity/gemini-pro-agent
+context200k
+	reasoninghigh
+fastfalse:ã
+Vplugin:dev.cursorbyok.plugins.antigravity-auth/antigravity/tab_jump_flash_lite_preview
+context200k
+	reasoninghigh
+fastfalse:Ö
+Pplugin:dev.cursorbyok.plugins.antigravity-auth/antigravity/gemini-3.6-flash-high
+context200k
+	reasoninghigh
+fastfalse:Ö
+Pplugin:dev.cursorbyok.plugins.antigravity-auth/antigravity/gemini-3.5-flash-lite
+context200k
+	reasoninghigh
+fastfalse:â
+Tplugin:dev.cursorbyok.plugins.antigravity-auth/antigravity/gemini-2.5-flash-thinking
+context200k
+	reasoninghigh
+fastfalse:Ö
+Pplugin:dev.cursorbyok.plugins.antigravity-auth/antigravity/gemini-2.5-flash-lite
+context200k
+	reasoninghigh
+fastfalse:Ö
+Pplugin:dev.cursorbyok.plugins.antigravity-auth/antigravity/gemini-3.7-flash-high
+context200k
+	reasoninghigh
+fastfalse:Ñ
+Oplugin:dev.cursorbyok.plugins.antigravity-auth/antigravity/gemini-3.5-flash-low
+context200k
+	reasoninghigh
+fastfalse:Ä
+Kplugin:dev.cursorbyok.plugins.antigravity-auth/antigravity/gemini-2.5-flash
+context200k
+	reasoninghigh
+fastfalse:~
+Iplugin:dev.cursorbyok.plugins.antigravity-auth/antigravity/gemini-3-flash
+context200k
+	reasoninghigh
+fastfalse:Ü
+Qplugin:dev.cursorbyok.plugins.antigravity-auth/antigravity/gemini-3.1-flash-image
+context200k
+	reasoninghigh
+fastfalse:É
+Nplugin:dev.cursorbyok.plugins.antigravity-auth/antigravity/gpt-oss-120b-medium
+context200k
+	reasoninghigh
+fastfalse:ä
+Uplugin:dev.cursorbyok.plugins.antigravity-auth/antigravity/gemini-3.5-flash-extra-low
+context200k
+	reasoninghigh
+fastfalse:á
+Rplugin:dev.cursorbyok.plugins.antigravity-auth/antigravity/gemini-3.8-flash-tiered
+context200k
+	reasoninghigh
+fastfalse:à
+Splugin:dev.cursorbyok.plugins.antigravity-auth/antigravity/claude-opus-4-6-thinking
+context200k
+	reasoninghigh
+fastfalse:Ü
+Qplugin:dev.cursorbyok.plugins.antigravity-auth/antigravity/tab_flash_lite_preview
+context200k
+	reasoninghigh
+fastfalse:á
+Rplugin:dev.cursorbyok.plugins.antigravity-auth/antigravity/gemini-3.7-flash-tiered
+context200k
+	reasoninghigh
+fastfalse:Ö
+Pplugin:dev.cursorbyok.plugins.antigravity-auth/antigravity/gemini-3.8-flash-high
+context200k
+	reasoninghigh
+fastfalse:á
+Rplugin:dev.cursorbyok.plugins.antigravity-auth/antigravity/gemini-3.6-flash-tiered
+context200k
+	reasoninghigh
+fastfalse:Ñ
+Oplugin:dev.cursorbyok.plugins.antigravity-auth/antigravity/gemini-3.8-flash-low
+context200k
+	reasoninghigh
+fastfalse:á
+Rplugin:dev.cursorbyok.plugins.antigravity-auth/antigravity/gemini-3.6-flash-medium
+context200k
+	reasoninghigh
+fastfalse:Ö
+Pplugin:dev.cursorbyok.plugins.antigravity-auth/antigravity/gemini-3.1-flash-lite
+context200k
+	reasoninghigh
+fastfalse:Ñ
+Oplugin:dev.cursorbyok.plugins.antigravity-auth/antigravity/gemini-3-flash-agent
+context200k
+	reasoninghigh
+fastfalse:Ñ
+Oplugin:dev.cursorbyok.plugins.antigravity-auth/antigravity/gemini-3.6-flash-low
+context200k
+	reasoninghigh
+fastfalse:á
+Rplugin:dev.cursorbyok.plugins.antigravity-auth/antigravity/gemini-3.8-flash-medium
+context200k
+	reasoninghigh
+fastfalse:Å
+Lplugin:dev.cursorbyok.plugins.antigravity-auth/antigravity/claude-sonnet-4-6
+context200k
+	reasoninghigh
+fastfalse:~
+Iplugin:dev.cursorbyok.plugins.antigravity-auth/antigravity/gemini-2.5-pro
+context200k
+	reasoninghigh
+fastfalse:Ä
+Kplugin:dev.cursorbyok.plugins.antigravity-auth/antigravity/gemini-3.7-flash
+context200k
+	reasoninghigh
+fastfalse:â
+Tplugin:dev.cursorbyok.plugins.antigravity-auth/antigravity/gemini-3.7-flash-thinking
+context200k
+	reasoninghigh
+fastfalse:Ü
+Qplugin:dev.cursorbyok.plugins.antigravity-auth/antigravity/gemini-3.1-pro-preview
+context200k
+	reasoninghigh
+fastfalse:Ö
+Pplugin:dev.cursorbyok.plugins.antigravity-auth/antigravity/gemini-3.1-pro-medium
+context200k
+	reasoninghigh
+fastfalse:Ä
+Kplugin:dev.cursorbyok.plugins.antigravity-auth/antigravity/gemini-2.0-flash
+context200k
+	reasoninghigh
+fastfalse:Ö
+Pplugin:dev.cursorbyok.plugins.antigravity-auth/antigravity/gemini-2.0-flash-lite
+context200k
+	reasoninghigh
+fastfalse:ä
+Uplugin:dev.cursorbyok.plugins.antigravity-auth/antigravity/claude-sonnet-4-6-thinking
+context200k
+	reasoninghigh
+fastfalse:Å
+Lplugin:dev.cursorbyok.plugins.antigravity-auth/antigravity/claude-3-7-sonnet
+context200k
+	reasoninghigh
+fastfalse:Å
+Lplugin:dev.cursorbyok.plugins.antigravity-auth/antigravity/claude-3-5-sonnet
+context200k
+	reasoninghigh
+fastfalse:Ä
+Kplugin:dev.cursorbyok.plugins.antigravity-auth/antigravity/claude-3-5-haiku
+context200k
+	reasoninghigh
+fastfalse:v
+Aplugin:dev.cursorbyok.plugins.antigravity-auth/antigravity/gpt-4o
+context200k
+	reasoninghigh
+fastfalse:{
+Fplugin:dev.cursorbyok.plugins.antigravity-auth/antigravity/gpt-4o-mini
+context200k
+	reasoninghigh
+fastfalsePZ√
+@57c5831e89347833c1543e7b49ef3e61fc07f4af7900307b10800d8589011d3cstable"(010b7f16e092da400a704898cd3edefdee05a31b(2	dsv3-10182	dsv3-12052cursor-02262latest2
+gpt5-codex2codex-cloud2haikuÇunspecifiedàê®»
